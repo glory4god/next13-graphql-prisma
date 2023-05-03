@@ -7,86 +7,9 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum ExchangeType {
-  KOSPI
-  KOSDAQ
-}
+model Example {
+  id   Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(15)
 
-enum LabelType {
-  POSITIVE @map("10")
-  NEGATIVE @map("20")
-  DONTKNOW @map("30")
-}
-
-model Stock {
-  stockCode   String       @id @unique @map("stock_code") @db.VarChar(8)
-  stockName   String       @unique @map("stock_name") @db.VarChar(45)
-  exchange    ExchangeType
-  stockPrices StockPrice[]
-  news        News[]
-
-  @@index([stockCode, stockName])
-  @@map("stock")
-}
-
-model StockPrice {
-  id        Int    @id @default(autoincrement()) @map("id")
-  stock     Stock  @relation(fields: [stockCode], references: [stockCode])
-  stockCode String @map("stock_code") @db.VarChar(8)
-  date      String @db.VarChar(8)
-  open      Int
-  close     Int
-  high      Int
-  low       Int
-  volume    Int
-
-  @@index([stockCode, date])
-  @@map("stock_price")
-}
-
-model News {
-  id        Int       @id @default(autoincrement()) @map("id")
-  stock     Stock     @relation(fields: [stockCode], references: [stockCode])
-  stockCode String    @map("stock_code")
-  label     LabelType
-
-  @@map("news")
-}
-
-model User {
-  id            Int     @id @default(autoincrement()) @map("id")
-  name          String? @db.VarChar(20)
-  email         String? @unique @db.VarChar(45)
-  emailVerified String? @unique @db.VarChar(45)
-  password      String? @db.VarChar(100)
-  image         String?
-
-  createTime DateTime @default(now()) @map("create_time")
-  updateTime DateTime @default(now()) @updatedAt @map("update_time")
-  Account    Account?
-
-  @@map("user")
-}
-
-model Account {
-  accountId                Int      @id @default(autoincrement()) @map("account_id")
-  type                     String
-  provider                 String
-  providerAccountId        String   @map("provider_account_id")
-  access_token             String?  @db.Text
-  refresh_token            String?  @db.Text
-  expires_at               Int?
-  token_type               String?
-  scope                    String?
-  idToken                  String?  @map("id_token") @db.Text
-  sessionState             String?  @map("session_state")
-  refresh_token_expires_in Int?
-  adminNo                  Int?     @unique @map("admin_no")
-  user                     User?    @relation(fields: [userId], references: [id])
-  userId                   Int?     @unique @map("user_id")
-  createTime               DateTime @default(now()) @map("create_time")
-  updateTime               DateTime @default(now()) @updatedAt @map("update_time")
-
-  @@unique([provider, providerAccountId])
-  @@map("account")
+  @@map("example")
 }

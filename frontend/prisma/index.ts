@@ -1,4 +1,4 @@
-import { Stock } from './types';
+import { Example } from './types';
 
 const MY_API_ENDPOINT = '/api';
 const domain = process.env.SITE_DOMAIN!;
@@ -48,9 +48,9 @@ export async function myFetch<T>({
     };
   }
 }
-export async function createStock(body: Stock): Promise<Stock> {
-  const res = await myFetch<Stock>({
-    url: '/stock',
+export async function createExample(body: Example): Promise<Example> {
+  const res = await myFetch<Example>({
+    url: '/example',
     query: body,
     cache: 'no-store'
   });

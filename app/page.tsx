@@ -1,19 +1,17 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import { getStocks } from 'frontend/prisma/queries';
-
-export const revalidate = 3600; // revalidate every hour
+import { getExamples } from 'frontend/prisma/queries';
 
 export default async function HomePage() {
-  const stocks = await getStocks();
+  const examples = await getExamples();
   return (
     <>
       <Suspense>
-        주식종목 리스트
-        {stocks.map((a) => {
-          return <div key={a.stockCode}>{a.stockName}</div>;
+        Next13-Prisma-tailwindcss-template
+        {examples.map((a, i) => {
+          return <div key={i}>{`Example` + i}</div>;
         })}
-        <Link href={'/create'}>등록하기</Link>
+        <Link href={'/create'}>등록페이지</Link>
       </Suspense>
     </>
   );

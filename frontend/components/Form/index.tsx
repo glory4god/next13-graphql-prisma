@@ -4,9 +4,9 @@ import { useCallback } from 'react';
 
 import clsx from 'clsx';
 import { useForm } from 'frontend/hooks';
-import { StockInit } from 'frontend/prisma/fragments';
-import { Stock } from 'frontend/prisma/types';
-import { createStock } from 'frontend/prisma';
+import { ExampleInit } from 'frontend/prisma/fragments';
+import { Example } from 'frontend/prisma/types';
+import { createExample } from 'frontend/prisma';
 
 const inputClass = `
 h-[44px] rounded-[1px] border-b-2 border-gray-300 px-2 pb-1
@@ -14,12 +14,12 @@ text-lg text-[26px] text-gray-600 outline-none transition-all
 duration-150 focus:border-red-300`;
 
 export default function Form() {
-  const { form, onFormChange, onFormReset } = useForm(StockInit);
+  const { form, onFormChange, onFormReset } = useForm(ExampleInit);
 
   const onPost = useCallback(
-    async (form: Stock) => {
+    async (form: Example) => {
       try {
-        await createStock(form);
+        await createExample(form);
         onFormReset();
       } catch (e) {
         console.log(e);
@@ -31,28 +31,10 @@ export default function Form() {
   return (
     <div>
       <div>
-        <input
-          name="stockCode"
-          value={form.stockCode}
-          onChange={onFormChange}
-          className={clsx(inputClass)}
-        />
+        <input name="id" value={form.id} onChange={onFormChange} className={clsx(inputClass)} />
       </div>
       <div>
-        <input
-          name="stockName"
-          value={form.stockName}
-          onChange={onFormChange}
-          className={clsx(inputClass)}
-        />
-      </div>
-      <div>
-        <input
-          name="exchange"
-          value={form.exchange}
-          onChange={onFormChange}
-          className={clsx(inputClass)}
-        />
+        <input name="name" value={form.name} onChange={onFormChange} className={clsx(inputClass)} />
       </div>
       <button onClick={() => onPost(form)}>등록</button>
     </div>
