@@ -1,5 +1,3 @@
-import { Example } from './types';
-
 const MY_API_ENDPOINT = '/api';
 const domain = process.env.SITE_DOMAIN!;
 const endpoint = `${domain ? domain : ''}${MY_API_ENDPOINT}`;
@@ -47,13 +45,4 @@ export async function myFetch<T>({
       query
     };
   }
-}
-export async function createExample(body: Example): Promise<Example> {
-  const res = await myFetch<Example>({
-    url: '/example',
-    query: body,
-    cache: 'no-store'
-  });
-
-  return res.body;
 }

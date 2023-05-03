@@ -5,8 +5,8 @@ import { useCallback } from 'react';
 import clsx from 'clsx';
 import { useForm } from 'frontend/hooks';
 import { ExampleInit } from 'frontend/prisma/fragments';
-import { Example } from 'frontend/prisma/types';
-import { createExample } from 'frontend/prisma';
+import { createExample } from 'frontend/prisma/mutations';
+import { Example } from 'types/types';
 
 const inputClass = `
 h-[44px] rounded-[1px] border-b-2 border-gray-300 px-2 pb-1

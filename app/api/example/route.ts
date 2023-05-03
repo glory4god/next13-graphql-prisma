@@ -1,4 +1,4 @@
-import { createExample } from 'frontend/prisma/mutations';
+import { createExample } from 'backend/prisma/mutations';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
